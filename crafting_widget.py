@@ -41,13 +41,14 @@ class CraftingWidget(QWidget):
             self.craft_item = self.craft_item_select.currentText()
             
             for i, character in enumerate(self.characters):
-                character.progress_bar.setMaximum(100)
-                character.progress_bar.setValue(0)
-                self.progress_layout.addWidget(QLabel(character.name), i, 0)
-                self.progress_layout.addWidget(character.progress_bar, i, 1)
-                self.progress_layout.addWidget(character.status_label, i, 2)
-                character.progress = 0
-                character.time_per_unit = 10 / max(1, character.skills["Crafting"])
+                if character.priority["Crafting"] <= 4:
+                    character.progress_bar.setMaximum(100)
+                    character.progress_bar.setValue(0)
+                    self.progress_layout.addWidget(QLabel(character.name), i, 0)
+                    self.progress_layout.addWidget(character.progress_bar, i, 1)
+                    self.progress_layout.addWidget(character.status_label, i, 2)
+                    character.progress = 0
+                    character.time_per_unit = 10 / max(1, character.skills["Crafting"])
             
             self.timer.start(100)  # 每100毫秒更新一次
         except ValueError:

@@ -4,6 +4,7 @@ from character_table_widget import CharacterTableWidget
 from land_widget import LandWidget
 from crafting_widget import CraftingWidget
 from storage_widget import StorageWidget
+from work_priority_widget import WorkPriorityWidget
 
 class MainWindow(QWidget):
     def __init__(self):
@@ -39,6 +40,10 @@ class MainWindow(QWidget):
         
         # 仓储界面标签
         self.tabs.addTab(self.storage_widget, "Storage")
+        
+        # 工作优先级界面标签
+        self.work_priority_widget = WorkPriorityWidget(self.characters)
+        self.tabs.addTab(self.work_priority_widget, "Work Priorities")
         
         layout.addWidget(self.tabs)
         self.setLayout(layout)

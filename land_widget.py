@@ -36,13 +36,14 @@ class LandWidget(QWidget):
             self.progress_layout.setRowStretch(len(self.characters), 1)
             
             for i, character in enumerate(self.characters):
-                character.progress_bar.setMaximum(100)
-                character.progress_bar.setValue(0)
-                self.progress_layout.addWidget(QLabel(character.name), i, 0)
-                self.progress_layout.addWidget(character.progress_bar, i, 1)
-                self.progress_layout.addWidget(character.status_label, i, 2)
-                character.progress = 0
-                character.time_per_unit = 10 / max(1, character.skills["Farming"])
+                if character.priority["Farming"] <= 4:
+                    character.progress_bar.setMaximum(100)
+                    character.progress_bar.setValue(0)
+                    self.progress_layout.addWidget(QLabel(character.name), i, 0)
+                    self.progress_layout.addWidget(character.progress_bar, i, 1)
+                    self.progress_layout.addWidget(character.status_label, i, 2)
+                    character.progress = 0
+                    character.time_per_unit = 10 / max(1, character.skills["Farming"])
             
             self.timer.start(100)  # 每100毫秒更新一次
         except ValueError:

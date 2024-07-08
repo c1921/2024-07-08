@@ -18,6 +18,10 @@ class Character:
         }
         self.status_label = QLabel("Idle")
         self.progress_bar = QProgressBar()
+        self.priority = {
+            "Farming": 5,
+            "Crafting": 5
+        }
 
     def __str__(self):
         skills = ', '.join([f"{k}: {v}" for k, v in self.skills.items()])
